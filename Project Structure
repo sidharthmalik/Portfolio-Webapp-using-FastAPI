@@ -1,0 +1,15 @@
+#Project Structure
+
+
+portfolio/
+├── main.py
+├── routers/
+│   ├── __init__.py
+│   └── pages.py
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   └── projects.html
+└── static/
+    ├── css/style.css
+    └── js/script.js
