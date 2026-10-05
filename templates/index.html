@@ -1,41 +1,148 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<!-- HERO -->
 <section class="hero">
-  <p class="eyebrow">Hello, I'm</p>
-  <h1>{{ profile.name }}<span class="accent">.</span></h1>
-  <h2>{{ profile.title }}</h2>
-  <p class="lead">{{ profile.tagline }}</p>
-  <div class="actions">
-    <a class="btn primary" href="/projects">View Projects</a>
-    <a class="btn ghost" href="/contact">Get in Touch</a>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  {% if profile.photo %}
+    <img class="hero-photo" src="{{ profile.photo }}" alt="{{ profile.name }}">
+  {% endif %}
+
+  <div class="hero-top wrap">
+    <p class="mini">{{ profile.year }} {{ profile.title }}</p>
+    <a class="mini next" href="/projects">
+      <span>Featured project</span>
+      <b>{{ projects[0].name }}</b>
+    </a>
+  </div>
+
+  <div class="hero-mid">
+    <h1 class="hero-name" data-parallax>
+      <span class="line"><span>{{ profile.first }}</span></span>
+      <span class="line outline"><span>{{ profile.last }}</span></span>
+    </h1>
+
+    <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
+      <defs>
+        <path id="ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/>
+      </defs>
+      <text>
+        <textPath href="#ring" textLength="495" lengthAdjust="spacing">Open to work &#8226; Data analyst &#8226; Open to work &#8226; Data analyst &#8226;</textPath>
+      </text>
+      <circle cx="100" cy="100" r="40"/>
+      <text class="arrow" x="100" y="116" text-anchor="middle">&#8599;</text>
+    </svg>
+  </div>
+
+  <div class="hero-bot wrap">
+    <p class="mini">{{ profile.location }}</p>
+    <p class="hero-tag">{{ profile.tagline }}</p>
+    <p class="mini scroll"><i></i>Scroll</p>
   </div>
 </section>
 
-<section class="section">
-  <h3 class="section-title">Skills</h3>
-  <div class="chips">
-    {% for s in profile.skills %}
-      <span class="chip">{{ s }}</span>
-    {% endfor %}
+<!-- TAPE -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-track">
+    {% for n in range(2) %}{% for s in profile.skills %}
+      <span>{{ s.name }}</span><i>&#10038;</i>
+    {% endfor %}{% endfor %}
+  </div>
+</div>
+
+<!-- MESSAGE -->
+<section class="section wrap">
+  <p class="kicker reveal"><i class="dot"></i>Message from {{ profile.first }}</p>
+  <h2 class="statement reveal">{{ profile.message|safe }}</h2>
+  <div class="about-grid reveal">
+    <p>{{ profile.about }}</p>
+    <ul class="edu">
+      {% for e in profile.education %}
+        <li><span>{{ e.degree }}</span><em>{{ e.note }}</em></li>
+      {% endfor %}
+    </ul>
   </div>
 </section>
 
+<!-- WORK STRIP -->
 <section class="section">
-  <div class="section-head">
-    <h3 class="section-title">Featured Projects</h3>
-    <a href="/projects" class="link">See all &rarr;</a>
+  <div class="wrap section-head reveal">
+    <p class="kicker"><i class="dot"></i>Selected work</p>
+    <a class="textlink" href="/projects">All projects &#8599;</a>
   </div>
-  <div class="grid">
+  <div class="strip" data-drag>
     {% for p in projects %}
-      <article class="card">
-        <h4>{{ p.name }}</h4>
-        <p>{{ p.desc }}</p>
-        <div class="tags">
-          {% for t in p.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+      <a class="shot" href="/projects" draggable="false">
+        <p class="shot-cap">{{ p.tags[0] }}</p>
+        <div class="shot-art">
+          <b>{{ "%02d"|format(loop.index) }}</b>
+          <span>{{ p.name }}</span>
         </div>
-      </article>
+        <p class="shot-tags">{{ p.tags|join(" · ") }}</p>
+      </a>
     {% endfor %}
   </div>
 </section>
+
+<!-- QUOTE -->
+<section class="section wrap quote reveal">
+  <p class="quote-text">{{ profile.quote }}</p>
+  <p class="sign">{{ profile.first }}</p>
+</section>
+
+<!-- SPLIT LINKS -->
+<section class="split">
+  <a class="split-card" href="/projects">
+    <h2><span>The</span><span>Work</span></h2>
+    <p>Selected <b>analytics</b>, <b>machine learning</b> and <b>dashboard</b> projects.</p>
+    <span class="go">&#8599;</span>
+  </a>
+  <a class="split-card" href="/contact">
+    <h2><span>Get</span><span>In Touch</span></h2>
+    <p>Open to <b>data analyst</b> roles and <b>collaborations</b>. Let's talk.</p>
+    <span class="go">&#8599;</span>
+  </a>
+</section>
+
+<!-- HALL OF FAME -->
+<section class="section wrap">
+  <div class="hof-head reveal">
+    <h2>Skills<br><em>Hall of Fame</em></h2>
+    <p>The tools I reach for most when turning data into answers.</p>
+  </div>
+  <div class="hof">
+    {% for s in profile.skills %}
+      <div class="hof-card reveal" style="--d:{{ '%.2f'|format((loop.index0 % 4) * 0.08) }}s">
+        <span class="hof-n">{{ "%02d"|format(loop.index) }}</span>
+        <div>
+          <h3>{{ s.name }}</h3>
+          <p>{{ s.kind }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- OUTLINE TAPE -->
+<div class="section-gap"></div>
+<div class="tape outline" aria-hidden="true">
+  <div class="tape-track">
+    {% for n in range(2) %}{% for s in profile.skills %}
+      <span>{{ s.name }}</span><i>&#10038;</i>
+    {% endfor %}{% endfor %}
+  </div>
+</div>
+
+<!-- FOLLOW -->
+<section class="section wrap">
+  <p class="kicker reveal"><i class="dot"></i>Follow along</p>
+  <div class="follow">
+    <a class="reveal" href="{{ profile.linkedin }}" target="_blank" rel="noopener"><span>LinkedIn</span><i>&#8599;</i></a>
+    <a class="reveal" href="{{ profile.github }}" target="_blank" rel="noopener"><span>GitHub</span><i>&#8599;</i></a>
+    <a class="reveal" href="{{ profile.x }}" target="_blank" rel="noopener"><span>X</span><i>&#8599;</i></a>
+  </div>
+</section>
+
 {% endblock %}

@@ -1,0 +1,13 @@
+{% macro project_row(p, i) %}
+<a class="row reveal" {% if p.link and p.link != '#' %}href="{{ p.link }}" target="_blank" rel="noopener"{% endif %}>
+  <span class="num">{{ "%02d"|format(i) }}</span>
+  <div class="row-main">
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.desc }}</p>
+  </div>
+  <div class="row-tags">
+    {% for t in p.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+  </div>
+  <span class="arrow">&#8599;</span>
+</a>
+{% endmacro %}

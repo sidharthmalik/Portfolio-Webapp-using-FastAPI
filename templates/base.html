@@ -3,31 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Sidharth Malik | Data Analyst{% endblock %}</title>
+  <title>{% block title %}{{ profile.name }} | {{ profile.title }}{% endblock %}</title>
+  <meta name="description" content="{{ profile.tagline }}">
+  <script>
+    (function () {
+      var r = document.documentElement;
+      r.classList.add('js');
+      try { if (sessionStorage.getItem('seen')) { r.classList.add('seen', 'ready'); } } catch (e) {}
+      setTimeout(function () { r.classList.add('ready'); }, 6000);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/main.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a href="/" class="logo">Sidharth<span>.</span></a>
-      <nav>
-        <a href="/" class="{{ 'active' if request.url.path == '/' else '' }}">Home</a>
-        <a href="/projects" class="{{ 'active' if request.url.path == '/projects' else '' }}">Projects</a>
-        <a href="/contact" class="{{ 'active' if request.url.path == '/contact' else '' }}">Contact</a>
-      </nav>
-    </div>
+  {% set path = request.url.path %}
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <span class="loader-label">Loading {{ profile.first }}</span>
+    <span class="loader-count"><span id="loader-count">0</span>%</span>
+  </div>
+
+  <header class="header" id="header">
+    <a href="/" class="logo">SM<span>.</span></a>
+    <p class="mini header-note">{{ profile.title }}<i></i>{{ profile.location }}</p>
+    <button class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+      <span>Menu</span><i></i>
+    </button>
   </header>
 
-  <main class="container">
+  <div class="menu" id="menu">
+    <nav class="menu-links">
+      <a href="/" class="{{ 'active' if path == '/' else '' }}"><em>01</em>Home</a>
+      <a href="/projects" class="{{ 'active' if path == '/projects' else '' }}"><em>02</em>Projects</a>
+      <a href="/contact" class="{{ 'active' if path == '/contact' else '' }}"><em>03</em>Contact</a>
+    </nav>
+    <div class="menu-foot">
+      <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+      <div>
+        <a href="{{ profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="{{ profile.github }}" target="_blank" rel="noopener">GitHub</a>
+        <a href="{{ profile.x }}" target="_blank" rel="noopener">X</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2026 Sidharth Malik. Built with FastAPI.</p>
+  <footer class="footer">
+    <div class="blob b3"></div>
+    <div class="wrap footer-inner">
+      <h2 class="footer-title">Always<br>asking <em>why.</em></h2>
+      <div class="footer-cta">
+        <a class="btn" href="mailto:{{ profile.email }}">Work enquiries &#8599;</a>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/projects">Projects</a>
+          <a href="/contact">Contact</a>
+          <a href="{{ profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="{{ profile.github }}" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <p class="mega">{{ profile.name }}</p>
+      <div class="footer-row">
+        <p>&copy; 2026 {{ profile.name }}. All rights reserved.</p>
+        <p>Built with FastAPI</p>
+      </div>
     </div>
   </footer>
 </body>

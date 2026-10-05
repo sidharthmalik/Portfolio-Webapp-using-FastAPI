@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Contact | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<section class="page-head wrap">
+  <p class="kicker"><i class="dot"></i>Say hello</p>
+  <h1 class="page-title">Let's talk</h1>
+</section>
+
+<section class="wrap contact">
+  <p class="lead">Open to data analyst roles and interesting analytics projects. Drop me a line.</p>
+  <a class="mail" href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+
+  <div class="rows">
+    <a class="row" href="{{ profile.linkedin }}" target="_blank" rel="noopener">
+      <span class="num">01</span>
+      <div class="row-main"><h3>LinkedIn</h3></div>
+      <div class="row-tags"></div>
+      <span class="arrow">&#8599;</span>
+    </a>
+    <a class="row" href="{{ profile.github }}" target="_blank" rel="noopener">
+      <span class="num">02</span>
+      <div class="row-main"><h3>GitHub</h3></div>
+      <div class="row-tags"></div>
+      <span class="arrow">&#8599;</span>
+    </a>
+    <a class="row" href="{{ profile.x }}" target="_blank" rel="noopener">
+      <span class="num">03</span>
+      <div class="row-main"><h3>X</h3></div>
+      <div class="row-tags"></div>
+      <span class="arrow">&#8599;</span>
+    </a>
+  </div>
+</section>
+{% endblock %}
