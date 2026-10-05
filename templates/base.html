@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Sidharth Malik | Data Analyst{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="/" class="logo">Sidharth<span>.</span></a>
+      <nav>
+        <a href="/" class="{{ 'active' if request.url.path == '/' else '' }}">Home</a>
+        <a href="/projects" class="{{ 'active' if request.url.path == '/projects' else '' }}">Projects</a>
+        <a href="/contact" class="{{ 'active' if request.url.path == '/contact' else '' }}">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Sidharth Malik. Built with FastAPI.</p>
+    </div>
+  </footer>
+</body>
+</html>

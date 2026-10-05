@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Projects | Sidharth Malik{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <p class="eyebrow">Selected work</p>
+  <h1>Projects</h1>
+  <p class="lead">A mix of analytics, machine learning and dashboarding work.</p>
+</section>
+
+<div class="grid">
+  {% for p in projects %}
+    <article class="card">
+      <h4>{{ p.name }}</h4>
+      <p>{{ p.desc }}</p>
+      <div class="tags">
+        {% for t in p.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+      </div>
+      {% if p.link and p.link != '#' %}
+        <a href="{{ p.link }}" target="_blank" rel="noopener" class="link">View project &rarr;</a>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>
+{% endblock %}

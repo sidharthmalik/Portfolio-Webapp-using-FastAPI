@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Hello, I'm</p>
+  <h1>{{ profile.name }}<span class="accent">.</span></h1>
+  <h2>{{ profile.title }}</h2>
+  <p class="lead">{{ profile.tagline }}</p>
+  <div class="actions">
+    <a class="btn primary" href="/projects">View Projects</a>
+    <a class="btn ghost" href="/contact">Get in Touch</a>
+  </div>
+</section>
+
+<section class="section">
+  <h3 class="section-title">Skills</h3>
+  <div class="chips">
+    {% for s in profile.skills %}
+      <span class="chip">{{ s }}</span>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h3 class="section-title">Featured Projects</h3>
+    <a href="/projects" class="link">See all &rarr;</a>
+  </div>
+  <div class="grid">
+    {% for p in projects %}
+      <article class="card">
+        <h4>{{ p.name }}</h4>
+        <p>{{ p.desc }}</p>
+        <div class="tags">
+          {% for t in p.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
