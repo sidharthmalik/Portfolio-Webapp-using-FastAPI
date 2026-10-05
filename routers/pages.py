@@ -4,9 +4,11 @@ from fastapi.templating import Jinja2Templates
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
+
 @router.get("/")
 def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
+
 
 @router.get("/projects")
 def projects(request: Request):
@@ -21,5 +23,5 @@ def projects(request: Request):
         },
     ]
     return templates.TemplateResponse(
-        "projects.html", {"request": request, "projects": project_list}
+        request, "projects.html", {"projects": project_list}
     )
