@@ -86,3 +86,12 @@ def contact(request: Request):
     return templates.TemplateResponse(
         request, "contact.html", {"profile": PROFILE}
     )
+    
+    
+    
+from fastapi import Request
+from fastapi.responses import HTMLResponse
+
+@router.get("/lab", response_class=HTMLResponse)
+async def lab(request: Request):
+    return templates.TemplateResponse(request, "lab.html")
