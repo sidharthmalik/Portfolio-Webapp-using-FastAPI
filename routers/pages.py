@@ -9,19 +9,18 @@ PROFILE = {
     "name": "Sidharth Malik",
     "first": "Sidharth",
     "last": "Malik",
-    "title": "Data Analyst",
+    "title": "Data Scientist",
     "year": "2026",
     "tagline": "I turn messy data into clear decisions.",
     # <b>...</b> words turn lime on the page
-    "message": "<b>Turning</b> messy data into <b>decisions</b>, building models that <b>move</b> the numbers and shipping tools that <b>work</b> in the real world.",
-    "quote": "Good analysis isn't about having more data. It's about asking better questions.",
-    "about": "Analyst by training, builder by habit. I use SQL, Python and BI tools to find the story inside the numbers, and I run Growzyn, a B2B lead generation automation venture.",
-    "location": "Haryana, India",
-    "email": "your-email@example.com",
-    "linkedin": "https://www.linkedin.com/in/your-handle",
-    "github": "https://github.com/your-handle",
-    "x": "https://x.com/your-handle",
-    "photo": None,  # e.g. "/static/images/me.png" (a cut-out PNG looks best)
+    "message":"I build things that <b>solve problems</b>, <b>automate workflows</b>, and <b>create value</b>. From <b>data-driven decisions</b> to <b>AI-powered products</b>, I'm here to <b>turn ideas into reality</b>.",
+"quote": "Good analysis isn't about having more data. It's about asking better questions.",
+    "about": "Analyst by training, builder by habit. I use SQL, Python and BI tools to find the story inside the numbers.",
+    "location": "India",
+    "email": "sidharthmalik000@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/sidharth-malik-66ba83291/",
+    "github": "https://github.com/sidharthmalik",
+    "photo":"https://x.com/sidharthmalik01",  # e.g. "/static/images/me.png" (a cut-out PNG looks best)
     "skills": [
         {"name": "SQL", "kind": "Querying"},
         {"name": "Python", "kind": "Programming"},
@@ -40,27 +39,17 @@ PROFILE = {
 
 PROJECTS = [
     {
-        "name": "Growzyn Lead Scoring",
+        "name": "Lead gen with auto email follow-ups system",
         "desc": "ML-based lead prioritization system for B2B outreach automation.",
         "tags": ["Python", "scikit-learn", "Automation"],
         "link": "#",
     },
-    {
-        "name": "Sales Forecast Dashboard",
-        "desc": "Power BI + Python forecasting pipeline for sales trend analysis.",
-        "tags": ["Power BI", "Python", "Forecasting"],
-        "link": "#",
-    },
+   
+    
     {
         "name": "Customer Segmentation",
         "desc": "RFM analysis and K-Means clustering on the Online Retail II dataset, with a Tableau dashboard.",
         "tags": ["Python", "K-Means", "Tableau"],
-        "link": "#",
-    },
-    {
-        "name": "Superstore SQL Analysis",
-        "desc": "End-to-end business analysis of Superstore sales data using MySQL.",
-        "tags": ["MySQL", "SQL", "EDA"],
         "link": "#",
     },
 ]
