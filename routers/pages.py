@@ -20,7 +20,7 @@ PROFILE = {
     "email": "sidharthmalik000@gmail.com",
     "linkedin": "https://www.linkedin.com/in/sidharth-malik-66ba83291/",
     "github": "https://github.com/sidharthmalik",
-    "photo":"https://x.com/sidharthmalik01",  # e.g. "/static/images/me.png" (a cut-out PNG looks best)
+    "photo":"https://x.com/sidharthmalik01uvicorn main:app --reload",  # e.g. "/static/images/me.png" (a cut-out PNG looks best)
     "skills": [
         {"name": "SQL", "kind": "Querying"},
         {"name": "Python", "kind": "Programming"},

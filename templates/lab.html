@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Lab</title>
+  <link rel="stylesheet" href="/static/css/lab.css">
+</head>
+<body>
+  <header class="lab-head">
+    <a href="/" class="back">← Back to portfolio</a>
+    <h1>LIVE LAB</h1>
+    <p class="sub">My projects, running right here in your browser. Nothing to install.</p>
+    <nav class="tabs">
+      <button class="tab active" data-tab="sql">SQL Playground</button>
+      <button class="tab" data-tab="rfm">Customer Segmentation</button>
+      <button class="tab" data-tab="leads">Growzyn Lead Scoring</button>
+      <button class="tab" data-tab="movies">Movie Recommender</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ SQL PLAYGROUND ============ -->
+    <section id="panel-sql" class="panel active">
+      <h2>Superstore SQL Playground</h2>
+      <p class="muted">A 1,500-row sample with the Superstore schema. Pick a preset or write your own query. Press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to run.</p>
+
+      <div class="controls">
+        <select id="sql-preset"></select>
+        <button id="sql-run" class="btn">Run query ▶</button>
+        <button id="sql-reset" class="btn ghost">Reset data</button>
+      </div>
+
+      <textarea id="sql-input" spellcheck="false" rows="9"></textarea>
+      <p id="sql-status" class="status"></p>
+      <div id="sql-out" class="table-wrap"></div>
+
+      <details class="schema">
+        <summary>Table schema</summary>
+        <code>superstore(order_id, order_date, ship_mode, segment, region, state, category, sub_category, product_name, sales, quantity, discount, profit)</code>
+      </details>
+    </section>
+
+    <!-- ============ CUSTOMER SEGMENTATION ============ -->
+    <section id="panel-rfm" class="panel">
+      <h2>Customer Segmentation (RFM + K-Means)</h2>
+      <p class="muted">Computes Recency, Frequency and Monetary value per customer, then clusters them with K-Means. Use the sample data or upload your own transaction CSV.</p>
+
+      <div class="controls">
+        <button id="rfm-sample" class="btn">Use sample data</button>
+        <label class="btn ghost file">Upload CSV
+          <input type="file" id="rfm-file" accept=".csv" hidden>
+        </label>
+        <label class="inline">Clusters (k): <b id="rfm-k-val">4</b>
+          <input type="range" id="rfm-k" min="2" max="8" value="4">
+        </label>
+        <label class="inline">X axis
+          <select id="rfm-x"><option value="R">Recency</option><option value="F">Frequency</option><option value="M" selected>Monetary</option></select>
+        </label>
+        <label class="inline">Y axis
+          <select id="rfm-y"><option value="R">Recency</option><option value="F" selected>Frequency</option><option value="M">Monetary</option></select>
+        </label>
+      </div>
+
+      <p class="muted small">CSV columns (Online Retail II works as-is): <code>Invoice, Quantity, InvoiceDate, Price, Customer ID</code>. Best under ~1M rows.</p>
+      <p id="rfm-status" class="status"></p>
+
+      <div class="chart-box"><canvas id="rfm-chart"></canvas></div>
+      <div id="rfm-table" class="table-wrap"></div>
+    </section>
+
+    <!-- ============ GROWZYN LEADS ============ -->
+    <section id="panel-leads" class="panel">
+      <h2>Growzyn · Lead Scoring &amp; Cold Email</h2>
+      <p class="muted">Growzyn finds B2B leads, scores them with a gradient-boosting classifier, and writes the outreach. This is a small version of the scoring and email steps, trained live in your browser on synthetic data. Change a lead and watch the score move.</p>
+
+      <ol class="pipeline">
+        <li>Scrape listings</li><li>Clean &amp; dedupe</li><li>Enrich</li><li>ML lead score</li><li>AI cold email</li>
+      </ol>
+      <p id="lead-model" class="status"></p>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Lead profile</h3>
+          <div class="row2">
+            <label class="field">Company<input type="text" id="ld-company" value="Apex Packaging"></label>
+            <label class="field">City<input type="text" id="ld-city" value="Ludhiana"></label>
+          </div>
+          <div class="row2">
+            <label class="field">Industry<select id="ld-industry"></select></label>
+            <label class="field">Lead source<select id="ld-source"></select></label>
+          </div>
+          <div class="row2">
+            <label class="field">Employees<input type="number" id="ld-employees" min="1" value="60"></label>
+            <label class="field">Years in business<input type="number" id="ld-years" min="0" value="12"></label>
+          </div>
+          <div class="row2">
+            <label class="field">Rating: <b id="ld-rating-val">4.2</b>
+              <input type="range" id="ld-rating" min="1" max="5" step="0.1" value="4.2"></label>
+            <label class="field">Review count<input type="number" id="ld-reviews" min="0" value="85"></label>
+          </div>
+          <div class="checks">
+            <label><input type="checkbox" id="ld-website" checked> Website</label>
+            <label><input type="checkbox" id="ld-email" checked> Email found</label>
+            <label><input type="checkbox" id="ld-phone"> Phone verified</label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Predicted conversion likelihood</h3>
+          <div class="score"><span id="ld-score">–</span><small>%</small><span class="tier" id="ld-tier"></span></div>
+          <p class="muted small" style="margin:8px 0 0">What moved this score vs. a typical lead:</p>
+          <div class="drivers" id="ld-drivers"></div>
+          <button class="btn" id="ld-email-btn">Write cold email ✉</button>
+          <pre class="email" id="ld-email-out"></pre>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px">Fictional scraped leads, ranked by score</h3>
+      <p class="muted small">All companies here are made up. Click a row to load it into the form above.</p>
+      <div id="ld-table" class="table-wrap"></div>
+    </section>
+
+    <!-- ============ MOVIE RECOMMENDER ============ -->
+    <section id="panel-movies" class="panel">
+      <h2>Movie Recommender</h2>
+      <p class="muted">Pick movies you love and get recommendations ranked by content similarity (TF-IDF + cosine similarity over genres, keywords and director).</p>
+
+      <div class="controls">
+        <input type="text" id="mv-input" list="mv-list" placeholder="Type a movie you like…" autocomplete="off">
+        <datalist id="mv-list"></datalist>
+        <select id="mv-genre"><option value="">All genres</option></select>
+        <button id="mv-example" class="btn ghost">Try an example</button>
+        <button id="mv-clear" class="btn ghost">Clear</button>
+      </div>
+      <div id="mv-chips" class="chips"></div>
+      <p id="mv-status" class="status"></p>
+      <div id="mv-results" class="cards"></div>
+    </section>
+  </main>
+
+  <!-- Libraries (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+  <!-- Tabs -->
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    function show(name) {
+      tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+      document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + name));
+      history.replaceState(null, "", "#" + name);
+    }
+    tabs.forEach(t => t.addEventListener("click", () => show(t.dataset.tab)));
+    const h = location.hash.replace("#", "");
+    if (document.getElementById("panel-" + h)) show(h);
+  </script>
+
+  <!-- Demos -->
+  <script src="/static/js/lab-sql.js"></script>
+  <script src="/static/js/lab-rfm.js"></script>
+  <script src="/static/js/lab-leads.js"></script>
+  <script src="/static/js/lab-movies.js"></script>
+</body>
+</html>
