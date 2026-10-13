@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Growzyn Lead Scorer | Live Demo</title>
+  <title>Lead Scorer | Live Demo</title>
   <style>
     :root { --bg:#0a0a0a; --text:#f2f2f2; --muted:#9a9a9a; --accent:#c6ff00; }
     * { box-sizing: border-box; }
@@ -25,6 +25,7 @@
   </style>
 </head>
 <body>
+  {% set url = demo_url | default("https://sidharthmalik-lead-in-and-auto-followup-system.hf.space") %}
   <div class="wrap">
     <a class="back" href="/">&larr; Back to portfolio</a>
     <h1>Lead <span>Scorer</span></h1>
@@ -35,10 +36,10 @@
     <p class="note">The demo may take up to a minute to wake up on first load.</p>
 
     <div class="frame">
-      <iframe src="{{ demo_url }}" title="Growzyn Lead Scorer demo" loading="lazy"></iframe>
+      <iframe src="{{ url }}" title="Lead Scorer demo" loading="lazy"></iframe>
     </div>
 
-    <a class="btn" href="{{ demo_url }}" target="_blank" rel="noopener">
+    <a class="btn" href="{{ url }}" target="_blank" rel="noopener">
       Open demo in a new tab &nearr;
     </a>
   </div>
