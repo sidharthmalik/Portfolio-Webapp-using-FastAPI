@@ -54,13 +54,17 @@ PROJECTS = [
     },
 ]
 # --------------------------------------------
+LEAD_SCORER_URL = "https://sidharthmalik-lead-in-and-auto-followup-system.hf.space"
+
+
 @router.get("/projects/lead-scorer")
 async def lead_scorer_demo(request: Request):
     return templates.TemplateResponse(
         request,
         "lead_scorer.html",
-        {"demo_url":"https:sidharthmalik-lead-in-and-auto-followup-system.space"},
-    )
+        {"demo_url": LEAD_SCORER_URL},
+    ),
+    
 
 @router.get("/")
 def home(request: Request):

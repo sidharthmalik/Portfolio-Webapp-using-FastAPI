@@ -16,3 +16,14 @@
   </div>
 </section>
 {% endblock %}
+
+LEAD_SCORER_URL = "https://huggingface.co/spaces/SidharthMalik/lead-in-and-auto-followup-system"
+
+
+@router.get("/projects/lead-scorer")
+async def lead_scorer_demo(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "lead_scorer.html",
+        {"demo_url": LEAD_SCORER_URL},
+    )
