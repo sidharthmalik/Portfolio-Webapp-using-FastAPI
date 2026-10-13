@@ -38,11 +38,11 @@ PROFILE = {
 }
 
 PROJECTS = [
-    {
+        {
         "name": "Lead gen with auto email follow-ups system",
         "desc": "ML-based lead prioritization system for B2B outreach automation.",
         "tags": ["Python", "scikit-learn", "Automation"],
-        "link": "#",
+        "link": "/projects/lead-scorer",
     },
    
     
@@ -54,7 +54,13 @@ PROJECTS = [
     },
 ]
 # --------------------------------------------
-
+@router.get("/projects/lead-scorer")
+async def lead_scorer_demo(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "lead_scorer.html",
+        {"demo_url":"https:sidharthmalik-lead-in-and-auto-followup-system.space"},
+    )
 
 @router.get("/")
 def home(request: Request):
