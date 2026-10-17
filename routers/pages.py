@@ -63,7 +63,7 @@ async def lead_scorer_demo(request: Request):
         request,
         "lead_scorer.html",
         {"demo_url": LEAD_SCORER_URL},
-    ),
+    )
     
 
 @router.get("/")
