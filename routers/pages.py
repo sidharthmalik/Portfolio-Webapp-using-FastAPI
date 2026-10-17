@@ -38,19 +38,29 @@ PROFILE = {
 }
 
 PROJECTS = [
-        {
+    {
         "name": "Lead gen with auto email follow-ups system",
         "desc": "ML-based lead prioritization system for B2B outreach automation.",
         "tags": ["Python", "scikit-learn", "Automation"],
         "link": "/projects/lead-scorer",
     },
-   
-    
     {
         "name": "Customer Segmentation",
         "desc": "RFM analysis and K-Means clustering on the Online Retail II dataset, with a Tableau dashboard.",
         "tags": ["Python", "K-Means", "Tableau"],
-        "link": "#",
+        "link": "/lab#rfm",
+    },
+    {
+        "name": "SQL Playground",
+        "desc": "Write and run SQL queries against a sample dataset, right in the browser.",
+        "tags": ["SQL", "Analytics"],
+        "link": "/lab#sql",
+    },
+    {
+        "name": "Movie Recommender",
+        "desc": "Type a movie you like and get similar titles recommended.",
+        "tags": ["Python", "Recommender"],
+        "link": "/lab#movies",
     },
 ]
 # --------------------------------------------
