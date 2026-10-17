@@ -1,15 +1,49 @@
-#Project Structure
+## Project Structure
 
-
+```
 portfolio/
-├── main.py
+├── main.py                     # FastAPI app entry point
+├── README.md
+├── requirements.txt
+├── .gitignore
 ├── routers/
 │   ├── __init__.py
-│   └── pages.py
+│   ├── pages.py                # Page routes, profile data, PROJECTS list
+│   └── api.py                  # API endpoints (e.g. AI outreach email drafting)
 ├── templates/
 │   ├── base.html
 │   ├── index.html
-│   └── projects.html
+│   ├── projects.html           # Project cards (built from PROJECTS in pages.py)
+│   ├── project.html            # ? single project page
+│   ├── lab.html                # Live Lab: SQL, segmentation, lead scoring, movies
+│   └── lead_scorer.html        # Lead Scorer page embedding the Hugging Face demo
 └── static/
-    ├── css/style.css
-    └── js/script.js
+    ├── main.js
+    ├── style.css
+    ├── css/
+    │   └── lab.css             # Live Lab styles
+    ├── js/
+    │   ├── project-links.js    # Links project cards to their live demos
+    │   ├── lab-rfm.js          # Customer segmentation demo
+    │   ├── lab-leads.js        # In-browser lead scoring demo
+    │   ├── lab.movies.js       # Movie recommender demo
+    │   └── movies.js           # ? movie data
+    ├── data/                   # Datasets used by the Live Lab demos
+    └── images/
+```
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Open `http://127.0.0.1:8000`.
+
+## Live demos
+
+- **Lead Scorer:** a Gradient Boosting model hosted on Hugging Face Spaces and embedded at `/projects/lead-scorer`.
+- **Live Lab (`/lab`):** SQL playground, customer segmentation (RFM and K-Means), lead scoring and movie recommender, all running in the browser.
